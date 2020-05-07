@@ -1,0 +1,9 @@
+#loading local file
+LOAD CSV WITH HEADERS FROM "file:///shareholder_company.csv" AS row
+CREATE (n:shareholder_company)
+SET n = row
+
+# create relationship
+MATCH(c.shareholder_company),(s.shareholder)
+WHERE c.Stakeholder = s.Stakeholder
+CREATE c - [r:hold_stake] ->s
